@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #f5f1e8;
+    color: #0f0e0c;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-card border border-black/10 shadow-card transition-all duration-200;
+  }
+  .card:hover {
+    @apply shadow-card-hover -translate-y-0.5;
+  }
+  .btn-primary {
+    @apply bg-accent text-white font-body font-medium px-6 py-2.5 rounded-xl
+           transition-all duration-200 hover:shadow-glow hover:-translate-y-px
+           active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply bg-paper-dim text-ink font-body font-medium px-6 py-2.5 rounded-xl border border-black/10
+           transition-all duration-200 hover:bg-white hover:shadow-card;
+  }
+  .btn-ghost {
+    @apply text-muted font-body font-medium px-4 py-2 rounded-lg
+           transition-all duration-200 hover:bg-black/5 hover:text-ink;
+  }
+  .input {
+    @apply w-full bg-paper-dim border border-black/10 rounded-xl px-4 py-3
+           font-body text-ink placeholder-muted/60 outline-none
+           transition-all duration-200
+           focus:border-accent/50 focus:ring-2 focus:ring-accent/10;
+  }
+  .tag-teal {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-medium
+           bg-teal/10 text-teal border border-teal/20;
+  }
+  .tag-gold {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-medium
+           bg-gold/10 text-gold border border-gold/20;
+  }
+  .tag-accent {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-medium
+           bg-accent/10 text-accent border border-accent/20;
+  }
+  .frosted {
+    @apply backdrop-blur-md bg-white/80 border-b border-black/10;
+  }
+  .page-fade {
+    animation: fadeIn 0.3s ease-out;
+  }
+  .sidebar {
+    @apply w-64 min-h-screen bg-white border-r border-black/10 flex flex-col;
+  }
+  .skill-tag {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono font-medium
+           bg-teal/10 text-teal border border-teal/20;
+  }
+  .skill-tag-learn {
+    @apply bg-gold/10 text-gold border-gold/20;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up { animation: slideUp 0.4s ease-out; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(15,14,12,0.15); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(15,14,12,0.25); }
