@@ -55,11 +55,21 @@ export default function Signup() {
     } catch (err) {
       console.error('Signup error:', err)
 
-      const message =
-        err?.response?.data?.error ||
-        err?.response?.data?.message ||
-        err?.message ||
-        'Signup failed. Please try again.'
+      // Safely extract a STRING from the backend response
+      const backendError = err?.response?.data?.error
+      const backendMessage = err?.response?.data?.message
+
+      let message = 'Signup failed. Please try again.'
+
+      if (typeof backendError === 'string') {
+        message = backendError
+      } else if (typeof backendMessage === 'string') {
+        message = backendMessage
+      } else if (typeof backendError?.message === 'string') {
+        message = backendError.message
+      } else if (typeof err?.message === 'string') {
+        message = err.message
+      }
 
       toast.error(message)
     } finally {
@@ -74,10 +84,10 @@ export default function Signup() {
       transition={{ duration: 0.4 }}
       className="w-full max-w-md"
     >
-      <div className="text-center mb-6">
-        <h1 className="text-3xl font-bold text-ink">
+      <div className="text-center">
+        <div className="text-3xl font-bold text-ink">
           SkillBarter
-        </h1>
+        </div>
 
         <h2 className="text-2xl font-semibold text-ink mt-4">
           Create your account
@@ -88,7 +98,7 @@ export default function Signup() {
         </p>
       </div>
 
-      <div className="card p-8">
+      <div className="card p-8 mt-6">
         <form onSubmit={handleSubmit} className="space-y-4">
 
           {/* NAME */}
